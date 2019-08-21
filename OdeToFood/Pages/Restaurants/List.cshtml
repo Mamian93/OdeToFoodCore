@@ -1,6 +1,7 @@
 ﻿@page
 @model ListModel
 @{
+    ViewData["Title"] = "Restaurants";
 }
 
 <h1>Restaurants</h1>
@@ -19,29 +20,16 @@
     </div>
 </form>
 
-<table class="table table-hover">
-    @foreach (var restaurant in Model.Restaurants)
-    {
-        <tr>
-            <td>@restaurant.Name</td>
-            <td>@restaurant.Location</td>
-            <td>@restaurant.Cuisine</td>
-            <td>
-                <a class="btn"
-                   asp-page="./Detail"
-                   asp-route-restaurantId="@restaurant.Id">
-                    <i class="glyphicon glyphicon-zoom-in"></i>
-                </a>
-                <a class="btn"
-                   asp-page="./Edit"
-                   asp-route-restaurantId="@restaurant.Id">
-                    <i class="glyphicon glyphicon-edit"></i>
-                </a>
-            </td>
-        </tr>
-    }
-</table>
-<a asp-page="./Edit" class="btn btn-primary"></a>
-<div>
-    <h4>@Model.Message</h4>
-</div>
+@foreach (var restaurant in Model.Restaurants)
+{
+    <partial name="_Summary" model="restaurant" />
+
+}
+
+<a asp-page="./Edit" class="btn btn-primary">Add restaurant</a>
+
+@section footer{
+    <div>
+        <h4>@Model.Message</h4>
+    </div>
+}
